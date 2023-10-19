@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+<!--  <bean class="com.example.springex.sample.SampleRepository"></bean>-->
+<!--  <bean class="com.example.springex.sample.SampleService"></bean>-->
+
+  <context:component-scan base-package="com.example.springex.sample"/>
+
+  <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springex"/>
+    <property name="username" value="test"/>
+    <property name="password" value="test"/>
+    <property name="dataSourceProperties">
+      <props>
+        <prop key="cachePrepStmts">true</prop>
+        <prop key="preStmtCacheSize">250</prop>
+        <prop key="prepStmtCacheSqlLimit">2048</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+    <constructor-arg ref="hikariConfig"/>
+  </bean>
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
+  </bean>
+
+  <mybatis:scan base-package="com.example.springex.mapper"></mybatis:scan>
+
+</beans>
