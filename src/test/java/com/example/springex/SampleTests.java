@@ -6,6 +6,7 @@ import com.example.springex.sample.reposoitory.SampleRepository;
 import com.example.springex.sample.service.SampleService;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,15 +18,13 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Log4j2
+@Slf4j
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 public class SampleTests {
 
     @Autowired
     SampleService sampleService;
-
-
 
     @Autowired
     SampleRepository sampleRepository;
@@ -41,11 +40,11 @@ public class SampleTests {
 
     @Test
     void testService1() throws SQLException, InterruptedException {
-        log.info(sampleService);
-        log.info(sampleRepository);
+        log.info("{}",sampleService);
+        log.info("{}",sampleRepository);
 
         Connection connection = dataSource.getConnection();
-        log.info(connection);
+        log.info("{}",connection);
         Assertions.assertNotNull(connection);
     }
 
