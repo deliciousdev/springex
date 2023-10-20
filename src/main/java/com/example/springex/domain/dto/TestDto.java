@@ -1,4 +1,4 @@
-package com.example.springex.dto;
+package com.example.springex.domain.dto;
 
 
 import lombok.Data;
