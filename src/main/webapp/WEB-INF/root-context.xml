@@ -9,7 +9,11 @@
 <!--  <bean class="com.example.springex.sample.SampleRepository"></bean>-->
 <!--  <bean class="com.example.springex.sample.SampleService"></bean>-->
 
-  <context:component-scan base-package="com.example.springex.sample"/>
+  <context:component-scan base-package="com.example.springex.config"/>
+  <context:component-scan base-package="com.example.springex.controller"/>
+  <context:component-scan base-package="com.example.springex.service"/>
+  <context:component-scan base-package="com.example.springex.repository"/>
+  <context:component-scan base-package="com.example.springex.mapper"/>
 
   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
