@@ -8,7 +8,7 @@
     select now()
   </select>
 
-  <insert id="insert">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
     insert into article (writer_id,title,content) values (1,#{title},#{content})
   </insert>
 

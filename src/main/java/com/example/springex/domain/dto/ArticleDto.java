@@ -4,6 +4,7 @@ package com.example.springex.domain.dto;
 import com.example.springex.domain.entity.Article;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @Getter
 @ToString
+@Setter
 public class ArticleDto {
 
     private int id;

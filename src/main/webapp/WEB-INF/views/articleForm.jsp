@@ -68,7 +68,7 @@
           </div>
           <div class="card-body">
 
-          <form id="actionForm" action="/article/modify" method="post">
+
             <div class="input-group mb-3">
               <span class="input-group-text">aid</span>
               <input type="text" name="id" class="form-control"
@@ -78,23 +78,19 @@
             <div class="input-group mb-3">
               <span class="input-group-text">Title</span>
               <input type="text" name="title" class="form-control"
-                     value='<c:out value="${articleDto.title}"></c:out>'>
+                     value='<c:out value="${articleDto.title}"></c:out>'readonly>
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text">writer</span>
               <input type="text" name="writer" class="form-control"
                      value=<c:out value="${articleDto.userDto.username}"></c:out> readonly>
-
-              <input type="hidden" name="writerId" class="form-control"
-                     value=<c:out value="${articleDto.userDto.id}"></c:out> >
-
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text">content</span>
               <input type="text" name="content" class="form-control"
-                     value=<c:out value="${articleDto.content}"></c:out> >
+                     value=<c:out value="${articleDto.content}"></c:out> readonly>
             </div>
 
             <div class="input-group mb-3">
@@ -102,41 +98,21 @@
               <input type="text" name="createdAt" class="form-control"
                      value=<c:out value="${articleDto.createdAt}"></c:out> readonly>
             </div>
-          </form>
-
 
             <div class="my-4">
               <div class="float-end">
-                <button type="button" class="btn btn-danger">삭제</button>
                 <button type="button" class="btn btn-primary">수정</button>
                 <button type="button" class="btn btn-secondary">목록</button>
               </div>
             </div>
-
-
             <script>
-              const formObj2 = document.querySelector("#actionForm");
               document.querySelector(".btn-primary").addEventListener("click",function(e){
-                e.preventDefault()
-                e.stopPropagation()
-                formObj2.action="/article/modify"
-                formObj2.method="post"
-                formObj2.submit()
+                self.location="/article/modify?articleId="+${articleDto.id}
               },false)
 
               document.querySelector(".btn-secondary").addEventListener("click",function(e){
                 self.location="/article/list";
               },false)
-
-              const formObj=document.querySelector("#actionForm")
-              document.querySelector(".btn-danger").addEventListener("click",function(e){
-
-                e.preventDefault()
-                e.stopPropagation()
-                formObj.action="/article/remove"
-                formObj.method="post"
-                formObj.submit()
-              },false);
             </script>
 
 

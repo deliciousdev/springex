@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Article {
 
+    @Setter
     private int id;
     private String title;
     private String content;

@@ -69,6 +69,7 @@
                     <div class="card-body">
 
                         <h5 class="card-title">Special title treatment</h5>
+                        <button type="button" class="btn btn-primary float-end">게시글 작성</button>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -129,7 +130,11 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<script>
+    document.querySelector('.btn-primary').addEventListener("click",function(e){
+        self.location='/article/register-form'
+    },false)
+</script>
 
 </body>
 </html>

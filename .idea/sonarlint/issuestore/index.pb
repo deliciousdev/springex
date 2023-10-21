@@ -1,6 +1,4 @@
 
-I
-src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
 d
 4src/main/java/com/example/springex/HelloServlet.java,4\4\44ca56fcec79d2dcc00ab7038a293d8b884004e1
 t

@@ -1,6 +1,7 @@
 package com.example.springex.controller;
 
 
+import com.example.springex.controller.request.ArticleModifyRequest;
 import com.example.springex.controller.request.ArticleRegisterRequest;
 import com.example.springex.domain.dto.ArticleDto;
 import com.example.springex.service.ArticleService;
@@ -37,7 +38,7 @@ public class ArticleController {
         return "list";
     }
 
-    @PostMapping
+    @PostMapping("/register")//등록
     public String register(
             @Valid ArticleRegisterRequest articleRegisterRequest,
             BindingResult bindingResult,
@@ -50,28 +51,36 @@ public class ArticleController {
             return "redirect:/article/register-form";
         }
 
-        articleService.register(articleRegisterRequest.getTitle(), articleRegisterRequest.getContent());
-        return "redirect:/article";
+        int articleId=articleService.register(articleRegisterRequest.getTitle(), articleRegisterRequest.getContent());
+        redirectAttributes.addAttribute("articleId", articleId);
+        return "redirect:/article/read";
     }
 
-    @GetMapping("/read")
+    @GetMapping("/read")//읽기
     public String readArticle(@RequestParam int articleId,Model model){
         ArticleDto articleDto = articleService.readArticle(articleId);
         model.addAttribute("articleDto", articleDto);
         return "article";
     }
 
-    @GetMapping("/modify")
+    @GetMapping("/modify")//수정폼
     public String articleModifyForm(@RequestParam int articleId,Model model){
         ArticleDto articleDto = articleService.readArticle(articleId);
         model.addAttribute("articleDto", articleDto);
         return "articleModifyForm";
     }
 
-    @PostMapping("/remove")
+    @PostMapping("/remove")//삭제요청
     public String removeArticle( @RequestParam int articleId,RedirectAttributes redirectAttributes) {
         log.info("{}",articleId);
         articleService.remove(articleId);
+        return "redirect:/article/list";
+    }
+
+    @PostMapping("/modify")//수정요청
+    public String modifyArticle(ArticleModifyRequest request, RedirectAttributes redirectAttributes){
+        log.info("asffadsfadsdfasdsafdsa");
+        log.info("{}",request);
         return "redirect:/article/list";
     }
 

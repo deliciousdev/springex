@@ -1,5 +1,6 @@
 package com.example.springex.mapper;
 
+import com.example.springex.domain.dto.ArticleDto;
 import com.example.springex.domain.entity.Article;
 
 import java.util.List;

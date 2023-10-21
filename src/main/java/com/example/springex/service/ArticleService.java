@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ArticleService {
 
-    void register(String article, String content);
+    int register(String article, String content);
 
     List<ArticleDto> getArticles();
 

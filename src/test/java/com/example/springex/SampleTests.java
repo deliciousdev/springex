@@ -42,11 +42,9 @@ public class SampleTests {
     @Test
 //    @Transactional
     void testInsert() {
-        for(int i=0; i<20; ++i){
-            Article article = Article.of("title", "content");
-            articleMapper.insert(article);
-        }
-
+        Article article = Article.of("title", "content");
+        articleMapper.insert(article);
+        log.info("{}", article.getId());
     }
 
     @Test

@@ -20,8 +20,10 @@ public class ArticleServiceIml implements ArticleService {
     private final ArticleMapper articleMapper;
 
     @Override
-    public void register(String title, String content) {
-        articleMapper.insert(Article.of(title, content));
+    public int register(String title, String content) {
+        Article article = Article.of(title, content);
+        articleMapper.insert(article);
+        return article.getId();
     }
 
     @Override
