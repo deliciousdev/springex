@@ -78,9 +78,15 @@ public class ArticleController {
     }
 
     @PostMapping("/modify")//수정요청
-    public String modifyArticle(ArticleModifyRequest request, RedirectAttributes redirectAttributes){
-        log.info("asffadsfadsdfasdsafdsa");
-        log.info("{}",request);
+    public String modifyArticle(@Valid ArticleModifyRequest request,
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes
+                                ){
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("articleId", request.getArticleId());
+            return "redirect:/article/modify";
+        }
 
         ArticleDto articleDto = articleService.modify(request.getArticleId(), request.getTitle(), request.getContent());
         redirectAttributes.addFlashAttribute("articleDto", articleDto);

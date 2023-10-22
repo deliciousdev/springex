@@ -72,25 +72,25 @@
             <div class="input-group mb-3">
               <span class="input-group-text">aid</span>
             <input type="text" name="id" class="form-control"
-                   value=<c:out value="${articleDto.id}"></c:out> readonly>
+                   value='<c:out value="${articleDto.id}"></c:out>' readonly>
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text">Title</span>
               <input type="text" name="title" class="form-control"
-                     value='<c:out value="${articleDto.title}"></c:out>'readonly>
+                     value='<c:out value="${articleDto.title}"></c:out>' readonly>
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text">writer</span>
               <input type="text" name="writer" class="form-control"
-                     value=<c:out value="${articleDto.userDto.username}"></c:out> readonly>
+                     value='<c:out value="${articleDto.userDto.username}"></c:out>' readonly>
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text">content</span>
               <input type="text" name="content" class="form-control"
-              value=<c:out value="${articleDto.content}"></c:out> readonly>
+              value='<c:out value="${articleDto.content}"></c:out>' readonly>
             </div>
 
             <div class="input-group mb-3">
