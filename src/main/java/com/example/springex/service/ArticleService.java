@@ -15,4 +15,6 @@ public interface ArticleService {
     ArticleDto readArticle(int articleId);
 
     void remove(int articleId);
+
+    ArticleDto modify(int articleId,String newTitle, String newContent);
 }

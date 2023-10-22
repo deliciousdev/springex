@@ -5,6 +5,7 @@ import com.example.springex.mapper.ArticleMapper;
 import com.example.springex.mapper.TimeMapper2;
 import com.example.springex.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,27 @@ public class SampleTests {
     @Test
     void deleteById() {
         articleMapper.deleteById(4);
+    }
+
+    @Test
+    void update(){
+        Article article = Article.of("before", "before");
+        articleMapper.insert(article);
+        log.info("{}",article);
+        Article article1= articleMapper.selectById(article.getId());
+        log.info("{}",article1);
+
+        article1.update("after", "after");
+        articleMapper.update(article1);
+        Article article2 = articleMapper.selectById(article1.getId());
+
+        log.info("{}",article2);
+    }
+
+    @Test
+    void test(){
+        String str= null;
+        log.info("{}", str.equals("x"));
     }
 
 }

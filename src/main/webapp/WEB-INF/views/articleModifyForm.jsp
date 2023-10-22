@@ -71,7 +71,7 @@
           <form id="actionForm" action="/article/modify" method="post">
             <div class="input-group mb-3">
               <span class="input-group-text">aid</span>
-              <input type="text" name="id" class="form-control"
+              <input type="text" name="articleId" class="form-control"
                      value=<c:out value="${articleDto.id}"></c:out> readonly>
             </div>
 

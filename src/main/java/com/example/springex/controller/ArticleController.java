@@ -81,7 +81,17 @@ public class ArticleController {
     public String modifyArticle(ArticleModifyRequest request, RedirectAttributes redirectAttributes){
         log.info("asffadsfadsdfasdsafdsa");
         log.info("{}",request);
-        return "redirect:/article/list";
+
+        ArticleDto articleDto = articleService.modify(request.getArticleId(), request.getTitle(), request.getContent());
+        redirectAttributes.addFlashAttribute("articleDto", articleDto);
+        redirectAttributes.addAttribute("articleId", articleDto.getId());
+        return "redirect:/article/read";
     }
 
+    @PostMapping("/booleanTest")
+    @ResponseBody
+    public String test(Boolean b){
+        log.info("{}", b);
+        return "ok";
+    }
 }

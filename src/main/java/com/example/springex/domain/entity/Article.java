@@ -3,7 +3,7 @@ package com.example.springex.domain.entity;
 import lombok.*;
 
 import java.time.LocalDateTime;
-
+import java.util.Objects;
 
 
 @Getter
@@ -29,6 +29,9 @@ public class Article {
         return new Article(title, content);
     }
 
-
+    public void update(String newTitle,String newContent){
+        this.title = newTitle;
+        this.content = newContent;
+    }
 
 }

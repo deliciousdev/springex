@@ -45,4 +45,9 @@
   <delete id="deleteById" parameterType="int">
     delete from article where aid=#{id}
   </delete>
+
+  <update id="update">
+    update article set title=#{title} , content=#{content}
+    where aid= #{id}
+  </update>
 </mapper>

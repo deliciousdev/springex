@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class ArticleModifyRequest {
 
-    private int id;
+    private int articleId;
     private String title;
     private String content;
     private String writer;

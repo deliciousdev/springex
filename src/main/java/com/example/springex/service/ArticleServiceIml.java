@@ -43,5 +43,13 @@ public class ArticleServiceIml implements ArticleService {
         articleMapper.deleteById(articleId);
     }
 
+    @Override
+    public ArticleDto modify(int articleId,String newTitle, String newContent) {
+        Article article = articleMapper.selectById(articleId);
+        article.update(newTitle,newContent);
+        articleMapper.update(article);
+        return ArticleDto.fromEntity(article);
+    }
+
 
 }
