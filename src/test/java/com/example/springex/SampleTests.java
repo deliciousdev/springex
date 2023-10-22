@@ -1,5 +1,8 @@
 package com.example.springex;
 
+import com.example.springex.domain.dto.ArticleDto;
+import com.example.springex.domain.dto.PageRequestDto;
+import com.example.springex.domain.dto.PageResponseDto;
 import com.example.springex.domain.entity.Article;
 import com.example.springex.mapper.ArticleMapper;
 import com.example.springex.mapper.TimeMapper2;
@@ -84,6 +87,14 @@ public class SampleTests {
     void test(){
         String str= null;
         log.info("{}", str.equals("x"));
+    }
+
+    @Test
+    void getList(){
+        PageRequestDto pageRequestDto = PageRequestDto.of();
+        log.info("{}",pageRequestDto);
+        PageResponseDto<ArticleDto> list = articleService.getList(pageRequestDto);
+        log.info("{}",list);
     }
 
 }

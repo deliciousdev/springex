@@ -50,4 +50,17 @@
     update article set title=#{title} , content=#{content}
     where aid= #{id}
   </update>
+
+  <select id="selectList" resultMap="Article">
+    select * from article a
+    join user u
+    on a.writer_id=u.uid
+    order by a.aid
+    limit #{skip},#{size}
+  </select>
+
+  <select id="getCount" resultType="int">
+    select count(*) from article
+  </select>
+
 </mapper>

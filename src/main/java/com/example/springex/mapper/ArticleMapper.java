@@ -1,6 +1,7 @@
 package com.example.springex.mapper;
 
 import com.example.springex.domain.dto.ArticleDto;
+import com.example.springex.domain.dto.PageRequestDto;
 import com.example.springex.domain.entity.Article;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface ArticleMapper {
     void deleteById(int id);
 
     void update(Article article);
+
+    List<Article> selectList(PageRequestDto pageRequestDto);
+
+    int getCount(PageRequestDto pageRequestDto);
 }
