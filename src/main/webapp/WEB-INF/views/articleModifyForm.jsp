@@ -69,6 +69,9 @@
           <div class="card-body">
 
           <form id="actionForm" action="/article/modify" method="post">
+
+            <input type="hidden" name="page" value="${pageRequestDto.page}">
+            <input type="hidden" name="size" value="${pageRequestDto.size}">
             <div class="input-group mb-3">
               <span class="input-group-text">aid</span>
               <input type="text" name="articleId" class="form-control"
@@ -129,11 +132,12 @@
                 e.stopPropagation()
                 formObj2.action="/article/modify"
                 formObj2.method="post"
+                console.log(formObj2);
                 formObj2.submit()
               },false)
 
               document.querySelector(".btn-secondary").addEventListener("click",function(e){
-                self.location="/article/list";
+                self.location="/article/list?page=${pageRequestDto.page}&size=${pageRequestDto.size}"
               },false)
 
               const formObj=document.querySelector("#actionForm")

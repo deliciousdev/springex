@@ -81,10 +81,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${articles}" var="articleDto">
+                            <c:forEach items="${responseDto.articleDtoList}" var="articleDto">
+                                <c:set var="i" value="${i+1}"/>
                                 <tr>
                                     <th scope="row"><c:out value="${articleDto.id}"/> </th>
-                                    <td><a href="/article/read?articleId=${articleDto.id}" class="text-decoration-none"><c:out value="${articleDto.title}"/></a></td>
+<%--                                    <th scope="row"><c:out value="${i}"/> </th>--%>
+                                    <td><a href="/article/read?articleId=${articleDto.id}&page=${pageRequestDto.page}&size=${pageRequestDto.size}" class="text-decoration-none">
+                                        <c:out value="${articleDto.title}"/></a></td>
                                     <td><c:out value="${articleDto.userDto.username}"/></td>
                                     <td><c:out value="${articleDto.content}"/></td>
                                     <td><c:out value="${articleDto.createdAt}"/></td>
@@ -92,6 +95,46 @@
                             </c:forEach>
                             </tbody>
                         </table>
+
+
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination flex-wrap">
+
+                                <c:if test="${responseDto.prev}">
+                                    <li class="page-item">
+                                        <a class="page-link" data-num="${responseDto.startOnNavi-1}">이전</a>
+                                    </li>
+                                </c:if>
+
+                                <c:forEach begin="${responseDto.startOnNavi}" end="${responseDto.endOnNavi}" var="num">
+
+                                    <li class="page-item ${responseDto.page==num? "active":""}">
+                                        <a class= "page-link" data-num="${num}">${num}</a>
+                                    </li>
+                                </c:forEach>
+
+                                <c:if test="${responseDto.next}">
+                                    <li class="page-item">
+                                        <a class="page-link" data-num="${responseDto.endOnNavi+1}">다음</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
+
+                        <script>
+                            document.querySelector(".pagination").addEventListener("click",function(e){
+                                e.preventDefault()
+                                e.stopPropagation()
+                                const target= e.target
+                                if(target.tagName !=='A'){
+                                    return
+                                }
+                                const num=target.getAttribute("data-num")
+
+                                self.location=`/article/list?page=\${num}`
+                            },false)
+                        </script>
+
 
                     </div>
                 </div>

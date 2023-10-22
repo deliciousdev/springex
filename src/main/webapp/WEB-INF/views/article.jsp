@@ -107,11 +107,11 @@
             </div>
             <script>
               document.querySelector(".btn-primary").addEventListener("click",function(e){
-                self.location="/article/modify?articleId="+${articleDto.id}
+                self.location="/article/modify?articleId=${articleDto.id}&page=${pageRequestDto.page}&size=${pageRequestDto.size}"
               },false)
 
               document.querySelector(".btn-secondary").addEventListener("click",function(e){
-                self.location="/article/list";
+                self.location="/article/list?page=${pageRequestDto.page}&size=${pageRequestDto.size}";
               },false)
             </script>
 

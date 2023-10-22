@@ -4,6 +4,8 @@ package com.example.springex.controller;
 import com.example.springex.controller.request.ArticleModifyRequest;
 import com.example.springex.controller.request.ArticleRegisterRequest;
 import com.example.springex.domain.dto.ArticleDto;
+import com.example.springex.domain.dto.PageRequestDto;
+import com.example.springex.domain.dto.PageResponseDto;
 import com.example.springex.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +32,16 @@ public class ArticleController {
     }
 
     @GetMapping("/list")
-    public String list(Model model){
+    public String list(@Valid PageRequestDto pageRequestDto, BindingResult bindingResult,Model model){
         log.info("ArticleController.list");
+
+        if(bindingResult.hasErrors()){
+            pageRequestDto = PageRequestDto.of();
+        }
+        PageResponseDto<ArticleDto> responseDto = articleService.getList(pageRequestDto);
+        model.addAttribute("responseDto", responseDto);
         List<ArticleDto> articles = articleService.getArticles();
         model.addAttribute("articles", articles);
-//        articles.forEach(a->log.info("{}",a));
         return "list";
     }
 
@@ -57,29 +64,33 @@ public class ArticleController {
     }
 
     @GetMapping("/read")//읽기
-    public String readArticle(@RequestParam int articleId,Model model){
+    public String readArticle(int articleId, PageRequestDto pageRequestDto,Model model){
         ArticleDto articleDto = articleService.readArticle(articleId);
         model.addAttribute("articleDto", articleDto);
         return "article";
     }
 
     @GetMapping("/modify")//수정폼
-    public String articleModifyForm(@RequestParam int articleId,Model model){
+    public String articleModifyForm(@RequestParam int articleId,PageRequestDto pageRequestDto,Model model){
         ArticleDto articleDto = articleService.readArticle(articleId);
         model.addAttribute("articleDto", articleDto);
         return "articleModifyForm";
     }
 
     @PostMapping("/remove")//삭제요청
-    public String removeArticle( @RequestParam int articleId,RedirectAttributes redirectAttributes) {
+    public String removeArticle( @RequestParam int articleId,PageRequestDto pageRequestDto,
+                                 RedirectAttributes redirectAttributes) {
         log.info("{}",articleId);
         articleService.remove(articleId);
+        redirectAttributes.addAttribute("page", pageRequestDto.getPage());
+        redirectAttributes.addAttribute("size", pageRequestDto.getSize());
         return "redirect:/article/list";
     }
 
     @PostMapping("/modify")//수정요청
     public String modifyArticle(@Valid ArticleModifyRequest request,
                                 BindingResult bindingResult,
+                                PageRequestDto pageRequestDto,
                                 RedirectAttributes redirectAttributes
                                 ){
         if (bindingResult.hasErrors()) {
@@ -91,6 +102,9 @@ public class ArticleController {
         ArticleDto articleDto = articleService.modify(request.getArticleId(), request.getTitle(), request.getContent());
         redirectAttributes.addFlashAttribute("articleDto", articleDto);
         redirectAttributes.addAttribute("articleId", articleDto.getId());
+        redirectAttributes.addAttribute("page", pageRequestDto.getPage());
+        redirectAttributes.addAttribute("size", pageRequestDto.getSize());
+
         return "redirect:/article/read";
     }
 
